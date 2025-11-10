@@ -81,10 +81,19 @@
             text-align: center;
         }
 
+        .section h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            margin-top: 40px;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
         .players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
+            margin-bottom: 50px;
         }
 
         .player-card {
@@ -101,10 +110,37 @@
             transform: translateY(-2px);
         }
 
-        .player-card h3 {
+        .player-card h4 {
             color: #ffffff;
             font-size: 1.1em;
             font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #141414;
+            border: 1px solid #2a2a2a;
+        }
+
+        th {
+            background: #0a0a0a;
+            color: #ffffff;
+            padding: 20px;
+            text-align: left;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        td {
+            padding: 20px;
+            color: #aaa;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        tr:hover {
+            background: #1a1a1a;
         }
 
         .akte-detail {
@@ -119,7 +155,7 @@
             display: block;
         }
 
-        .akte-detail h3 {
+        .akte-detail h4 {
             color: #ffffff;
             font-size: 1.5em;
             margin-bottom: 20px;
@@ -162,7 +198,7 @@
             padding-left: 30px;
         }
 
-        .gesetz-item h3 {
+        .gesetz-item h4 {
             color: #ffffff;
             margin-bottom: 12px;
             font-size: 1.3em;
@@ -236,24 +272,45 @@
             let html = '';
 
             // Teams Section
-            html += '<div class="section" id="teams"><h2>VERFÜGBARE SPIELER</h2>';
+            html += '<div class="section" id="teams"><h2>TEAMS</h2>';
+            
+            // Verfügbare Spieler
+            html += '<h3>Verfügbare Spieler</h3>';
             html += '<div class="players-grid">';
-            data.teams.forEach(team => {
+            data.verfuegbareSpieler.forEach(spieler => {
                 html += `
                     <div class="player-card">
-                        <h3>${team.name}</h3>
+                        <h4>${spieler}</h4>
                     </div>
                 `;
             });
-            html += '</div></div>';
+            html += '</div>';
+
+            // Teams Tabelle
+            html += '<h3>Teams</h3>';
+            html += '<table><thead><tr><th>Team Name</th><th>Anführer</th><th>Mitglieder</th><th>Erstellt am</th></tr></thead><tbody>';
+            
+            data.teams.forEach(team => {
+                const mitglieder = team.mitglieder.join(', ') || '-';
+                html += `
+                    <tr>
+                        <td><strong>${team.name}</strong></td>
+                        <td>${team.anfuehrer}</td>
+                        <td>${mitglieder}</td>
+                        <td>${team.erstelltAm}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table></div>';
 
             // Akten Section
             html += '<div class="section" id="akten"><h2>AKTEN</h2>';
             html += '<div class="players-grid">';
-            data.teams.forEach(team => {
+            data.verfuegbareSpieler.forEach(spieler => {
                 html += `
-                    <div class="player-card" onclick="showAkte('${team.name}')">
-                        <h3>${team.name}</h3>
+                    <div class="player-card" onclick="showAkte('${spieler}')">
+                        <h4>${spieler}</h4>
                     </div>
                 `;
             });
@@ -266,7 +323,7 @@
             data.gesetze.forEach(gesetz => {
                 html += `
                     <div class="gesetz-item">
-                        <h3>${gesetz.titel}</h3>
+                        <h4>${gesetz.titel}</h4>
                         <p>${gesetz.text}</p>
                     </div>
                 `;
@@ -279,13 +336,12 @@
         function showAkte(playerName) {
             const akteDetail = document.getElementById('akte-detail');
             
-            // Finde Einträge für diesen Spieler
             const playerAkten = currentData.akten.filter(akte => 
                 akte.spieler === playerName
             );
 
             let html = `<button class="back-button" onclick="hideAkte()">Zurück</button>`;
-            html += `<h3>Akte: ${playerName}</h3>`;
+            html += `<h4>Akte: ${playerName}</h4>`;
 
             if (playerAkten.length === 0) {
                 html += '<p class="akte-empty">Diese Akte ist leer</p>';
