@@ -1,21 +1,34 @@
 {
+  "verfuegbareSpieler": [
+    "Fatih", "Anis", "Antoine", "Arnav", "Delvan", "Diyen", 
+    "Efe", "Josef", "Julian", "Karl", "Kian", "Said", 
+    "Silas", "Tawfiq", "Danilo", "Tom"
+  ],
   "teams": [
-    {"name": "Fatih", "beschreibung": "", "mitglieder": []},
-    {"name": "Anis", "beschreibung": "", "mitglieder": []},
-    {"name": "Antoine", "beschreibung": "", "mitglieder": []},
-    {"name": "Arnav", "beschreibung": "", "mitglieder": []},
-    {"name": "Delvan", "beschreibung": "", "mitglieder": []},
-    {"name": "Diyen", "beschreibung": "", "mitglieder": []},
-    {"name": "Efe", "beschreibung": "", "mitglieder": []},
-    {"name": "Josef", "beschreibung": "", "mitglieder": []},
-    {"name": "Julian", "beschreibung": "", "mitglieder": []},
-    {"name": "Karl", "beschreibung": "", "mitglieder": []},
-    {"name": "Kian", "beschreibung": "", "mitglieder": []},
-    {"name": "Said", "beschreibung": "", "mitglieder": []},
-    {"name": "Silas", "beschreibung": "", "mitglieder": []},
-    {"name": "Tawfiq", "beschreibung": "", "mitglieder": []},
-    {"name": "Danilo", "beschreibung": "", "mitglieder": []},
-    {"name": "Tom", "beschreibung": "", "mitglieder": []}
+    {
+      "name": "Team 1",
+      "anfuehrer": "-",
+      "mitglieder": [],
+      "erstelltAm": "-"
+    },
+    {
+      "name": "Team 2",
+      "anfuehrer": "-",
+      "mitglieder": [],
+      "erstelltAm": "-"
+    },
+    {
+      "name": "Team 3",
+      "anfuehrer": "-",
+      "mitglieder": [],
+      "erstelltAm": "-"
+    },
+    {
+      "name": "Team 4",
+      "anfuehrer": "-",
+      "mitglieder": [],
+      "erstelltAm": "-"
+    }
   ],
   "akten": [],
   "gesetze": [
