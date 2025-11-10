@@ -3,416 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1, 2 oder 3 - Wirtschafts-Quiz</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>MC Server</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            box-sizing: border-box;
         }
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .8; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        .animate-bounce {
-            animation: bounce 1s infinite;
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #2a2a2a;
         }
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(-5%);
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-            50% {
-                transform: translateY(0);
-                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            }
+
+        header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #888;
+            font-weight: 300;
+        }
+
+        .section {
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            padding: 35px;
+            margin-bottom: 30px;
+            transition: border-color 0.3s;
+        }
+
+        .section:hover {
+            border-color: #444;
+        }
+
+        .section h2 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .team {
+            background: #0a0a0a;
+            border-left: 2px solid #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+
+        .team:hover {
+            border-left-width: 4px;
+            padding-left: 25px;
+        }
+
+        .team h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .team p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .team-members {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        .akte-item, .gesetz-item {
+            background: #0a0a0a;
+            border-left: 2px solid #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+
+        .akte-item:hover, .gesetz-item:hover {
+            border-left-width: 4px;
+            padding-left: 25px;
+        }
+
+        .akte-item h3, .gesetz-item h3 {
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .akte-item p, .gesetz-item p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        .akte-item small {
+            color: #666;
+            font-size: 0.9em;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid #2a2a2a;
+            font-size: 0.9em;
+        }
+
+        footer #lastUpdate {
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <div id="app"></div>
+    <div class="container">
+        <header>
+            <h1>MC Server</h1>
+            <p>Teams · Akten · Gesetze</p>
+        </header>
+
+        <div id="content">
+            <div class="loading">Lade Daten...</div>
+        </div>
+
+        <footer>
+            <p>Minecraft Server / Letztes Update: <span id="lastUpdate"></span></p>
+        </footer>
+    </div>
 
     <script>
-        const slides = [
-            {
-                type: 'title',
-                content: {
-                    title: '1, 2 oder 3',
-                    subtitle: 'Wirtschafts-Quiz',
-                    tagline: 'Ob ihr wirklich richtig steht, seht ihr wenn das Licht angeht!'
-                }
-            },
-            {
-                type: 'category',
-                content: { title: 'Wirtschafts-<br>kreislauf' }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Wer stellt im einfachen Wirtschaftskreislauf die Produktionsfaktoren bereit?',
-                    answers: [
-                        { text: 'Unternehmen', color: 'red' },
-                        { text: 'Haushalte', color: 'yellow', correct: true },
-                        { text: 'Staat', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Was erhalten die Haushalte von den Unternehmen für ihre Arbeit?',
-                    answers: [
-                        { text: 'Kredite', color: 'red' },
-                        { text: 'Löhne', color: 'yellow', correct: true },
-                        { text: 'Steuern', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Wofür geben die Haushalte ihr Einkommen im Kreislauf hauptsächlich aus?',
-                    answers: [
-                        { text: 'Konsumgüter', color: 'red', correct: true },
-                        { text: 'Aktien', color: 'yellow' },
-                        { text: 'Subventionen', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Welche Funktion haben Banken im erweiterten Wirtschaftskreislauf?',
-                    answers: [
-                        { text: 'Sie erheben Steuern', color: 'red' },
-                        { text: 'Sie vergeben Kredite', color: 'yellow', correct: true },
-                        { text: 'Sie stellen Arbeitskräfte bereit', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Welche Rolle spielt das Ausland im erweiterten Wirtschaftskreislauf?',
-                    answers: [
-                        { text: 'Es zahlt Subventionen', color: 'red' },
-                        { text: 'Es ermöglicht Import und Export', color: 'yellow', correct: true },
-                        { text: 'Es vergibt Kredite an Haushalte', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'category',
-                content: { title: 'Wirtschaft + Grundgesetz' }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Welches Grundgesetz fördert die soziale Marktwirtschaft und schützt die Rechte der Arbeitnehmer?',
-                    answers: [
-                        { text: 'Artikel 14', color: 'red' },
-                        { text: 'Artikel 9', color: 'yellow', correct: true },
-                        { text: 'Artikel 12', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Welcher Artikel gewährleistet die freie Berufswahl und fördert Innovation und Wettbewerbsfähigkeit?',
-                    answers: [
-                        { text: 'Artikel 12', color: 'red', correct: true },
-                        { text: 'Artikel 14', color: 'yellow' },
-                        { text: 'Artikel 9', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Welcher Artikel schützt das Eigentum und stärkt Vertrauen in Investitionen und wirtschaftliches Wachstum?',
-                    answers: [
-                        { text: 'Artikel 14', color: 'red', correct: true },
-                        { text: 'Artikel 12', color: 'yellow' },
-                        { text: 'Artikel 9', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'category',
-                content: { title: 'Zinsen' }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Warum erhöhen Zentralbanken in der Regel die Zinsen?',
-                    answers: [
-                        { text: 'Um die Inflation zu bremsen', color: 'red', correct: true },
-                        { text: 'Um mehr Geld in Umlauf zu bringen', color: 'yellow' },
-                        { text: 'Um den Staat direkt zu finanzieren', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'In welcher Stadt hat die Europäische Zentralbank ihren Hauptsitz?',
-                    answers: [
-                        { text: 'Brüssel', color: 'red' },
-                        { text: 'Frankfurt am Main', color: 'yellow', correct: true },
-                        { text: 'Luxemburg', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Welches ökonomische Problem prägte die 1970er-Jahre bei gleichzeitig hoher Inflation?',
-                    answers: [
-                        { text: 'Deflation', color: 'red' },
-                        { text: 'Stagflation', color: 'yellow', correct: true },
-                        { text: 'Hyperinflation', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'category',
-                content: { title: 'Preis und Nachfrage' }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Was passiert in der Regel mit der Nachfrage, wenn der Preis eines Produkts steigt?',
-                    answers: [
-                        { text: 'Die Nachfrage steigt', color: 'red' },
-                        { text: 'Die Nachfrage sinkt', color: 'yellow', correct: true },
-                        { text: 'Die Nachfrage bleibt immer gleich', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Wie nennt man die Beziehung zwischen Preis und Nachfragemenge in der Volkswirtschaftslehre?',
-                    answers: [
-                        { text: 'Nachfragegesetz', color: 'red', correct: true },
-                        { text: 'Angebotskurve', color: 'yellow' },
-                        { text: 'Produktionsfunktion', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Wenn der Preis für ein Gut sinkt, wie reagieren die meisten Konsumenten?',
-                    answers: [
-                        { text: 'Sie kaufen weniger', color: 'red' },
-                        { text: 'Sie kaufen mehr', color: 'yellow', correct: true },
-                        { text: 'Ihr Kaufverhalten verändert sich nie', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Was versteht man unter einer Preiselastizität der Nachfrage?',
-                    answers: [
-                        { text: 'Wie stark die Nachfrage auf Preisänderungen reagiert', color: 'red', correct: true },
-                        { text: 'Wie flexibel der Produzent seine Preise festlegt', color: 'yellow' },
-                        { text: 'Wie schnell die Produktion angepasst werden kann', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'question',
-                content: {
-                    question: 'Welcher Faktor beeinflusst die Nachfrage zusätzlich zum Preis?',
-                    answers: [
-                        { text: 'Einkommen der Käufer', color: 'red', correct: true },
-                        { text: 'Farbe des Produkts', color: 'yellow' },
-                        { text: 'Produktionskosten des Herstellers', color: 'blue' }
-                    ]
-                }
-            },
-            {
-                type: 'end',
-                content: {
-                    title: 'Das war\'s!',
-                    subtitle: '🎉 Quiz beendet 🎉'
-                }
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                displayData(data);
+            } catch (error) {
+                document.getElementById('content').innerHTML = 
+                    '<div class="section"><p style="color: red;">Fehler beim Laden der Daten. Bitte data.json Datei überprüfen.</p></div>';
             }
-        ];
-
-        let currentSlide = 0;
-        let showAnswer = false;
-
-        function getColorClass(color, isCorrect = false) {
-            const colors = {
-                red: showAnswer && !isCorrect ? 'background: rgba(127, 29, 29, 0.4);' : 'background: #dc2626;',
-                yellow: showAnswer && !isCorrect ? 'background: rgba(113, 63, 18, 0.4);' : 'background: #eab308;',
-                blue: showAnswer && !isCorrect ? 'background: rgba(30, 58, 138, 0.4);' : 'background: #2563eb;'
-            };
-            return colors[color] || 'background: #4b5563;';
         }
 
-        function render() {
-            const app = document.getElementById('app');
-            const slide = slides[currentSlide];
-            
-            let content = '';
-            
-            if (slide.type === 'title') {
-                content = `
-                    <div style="position: fixed; inset: 0; background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #581c87 100%); display: flex; flex-direction: column;">
-                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
-                            <div style="background: linear-gradient(to right, #facc15, #f97316, #dc2626); border-radius: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); padding: 2rem; text-align: center; width: 100%; max-width: 72rem;" class="animate-pulse">
-                                <div style="font-size: clamp(2rem, 8vw, 6rem); font-weight: 900; color: white; margin-bottom: 1.5rem; text-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
-                                    ${slide.content.title}
-                                </div>
-                                <div style="font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: bold; color: white; margin-bottom: 2rem;">
-                                    ${slide.content.subtitle}
-                                </div>
-                                <div style="font-size: clamp(0.875rem, 2vw, 1.5rem); color: white; font-weight: 600; font-style: italic; background: rgba(0,0,0,0.3); border-radius: 1rem; padding: 1rem;">
-                                    ${slide.content.tagline}
-                                </div>
-                            </div>
-                        </div>
-                        ${getNavigation()}
+        function displayData(data) {
+            let html = '';
+
+            // Teams Section
+            html += '<div class="section"><h2>TEAMS</h2>';
+            data.teams.forEach(team => {
+                html += `
+                    <div class="team">
+                        <h3>${team.name}</h3>
+                        <p>${team.beschreibung}</p>
+                        <p class="team-members">Mitglieder: ${team.mitglieder.join(', ')}</p>
                     </div>
                 `;
-            } else if (slide.type === 'category') {
-                content = `
-                    <div style="position: fixed; inset: 0; background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #581c87 100%); display: flex; flex-direction: column;">
-                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
-                            <div style="background: linear-gradient(to bottom right, #2563eb, #7c3aed); border-radius: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); padding: 3rem; text-align: center; width: 100%; max-width: 72rem;">
-                                <div style="font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 900; color: white; text-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);" class="animate-bounce">
-                                    ${slide.content.title}
-                                </div>
-                            </div>
-                        </div>
-                        ${getNavigation()}
+            });
+            html += '</div>';
+
+            // Akten Section
+            html += '<div class="section"><h2>AKTEN</h2>';
+            data.akten.forEach(akte => {
+                html += `
+                    <div class="akte-item">
+                        <h3>${akte.titel}</h3>
+                        <p>${akte.inhalt}</p>
+                        <small>${akte.datum}</small>
                     </div>
                 `;
-            } else if (slide.type === 'question') {
-                const answersHTML = slide.content.answers.map((answer, idx) => `
-                    <div onclick="toggleAnswer()" style="${getColorClass(answer.color, answer.correct)}
-                        ${showAnswer && answer.correct ? 'outline: 8px solid #4ade80; transform: scale(1.05);' : ''}
-                        border-radius: 1rem; padding: 1rem; color: white; font-size: clamp(1rem, 3vw, 2rem); font-weight: bold; text-align: center; transform: translateZ(0); transition: all 0.5s; cursor: pointer; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); display: flex; align-items: center; justify-content: center; gap: 1rem;">
-                        <span style="font-size: clamp(1.5rem, 4vw, 3rem);">${idx + 1}</span>
-                        <span>${answer.text}</span>
-                        ${showAnswer && answer.correct ? '<span style="font-size: clamp(1.5rem, 4vw, 3rem);" class="animate-bounce">✓</span>' : ''}
-                    </div>
-                `).join('');
+            });
+            html += '</div>';
 
-                content = `
-                    <div style="position: fixed; inset: 0; background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #581c87 100%); display: flex; flex-direction: column;">
-                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 0.5rem; overflow: hidden;">
-                            <div style="background: white; border-radius: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); padding: 1rem; width: 100%; height: 100%; max-width: 72rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;">
-                                <div style="font-size: clamp(1rem, 3vw, 2.5rem); font-weight: bold; color: #1f2937; margin-bottom: 1.5rem; text-align: center;">
-                                    ${slide.content.question}
-                                </div>
-                                
-                                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
-                                    ${answersHTML}
-                                </div>
-
-                                ${!showAnswer ? `
-                                    <div style="text-align: center;">
-                                        <button onclick="toggleAnswer()" style="background: linear-gradient(to right, #22c55e, #16a34a); color: white; padding: 0.75rem 2rem; border-radius: 9999px; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: bold; border: none; cursor: pointer; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transition: transform 0.2s;">
-                                            Lösung zeigen
-                                        </button>
-                                    </div>
-                                ` : `
-                                    <div style="text-align: center; font-size: clamp(0.875rem, 2vw, 2rem); font-weight: bold; color: #374151;" class="animate-pulse">
-                                        Ob ihr wirklich richtig steht...
-                                    </div>
-                                `}
-                            </div>
-                        </div>
-                        ${getNavigation()}
+            // Gesetze Section
+            html += '<div class="section"><h2>GESETZE</h2>';
+            data.gesetze.forEach((gesetz, index) => {
+                html += `
+                    <div class="gesetz-item">
+                        <h3>§${index + 1} ${gesetz.titel}</h3>
+                        <p>${gesetz.text}</p>
                     </div>
                 `;
-            } else if (slide.type === 'end') {
-                content = `
-                    <div style="position: fixed; inset: 0; background: linear-gradient(135deg, #581c87 0%, #1e3a8a 50%, #581c87 100%); display: flex; flex-direction: column;">
-                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
-                            <div style="background: linear-gradient(to right, #4ade80, #3b82f6, #a855f7); border-radius: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); padding: 3rem; text-align: center; width: 100%; max-width: 72rem;">
-                                <div style="font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 900; color: white; margin-bottom: 2rem; text-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);" class="animate-bounce">
-                                    ${slide.content.title}
-                                </div>
-                                <div style="font-size: clamp(1.5rem, 4vw, 3rem); color: white; font-weight: bold;">
-                                    ${slide.content.subtitle}
-                                </div>
-                            </div>
-                        </div>
-                        ${getNavigation()}
-                    </div>
-                `;
-            }
+            });
+            html += '</div>';
 
-            app.innerHTML = content;
+            document.getElementById('content').innerHTML = html;
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('de-DE');
         }
 
-        function getNavigation() {
-            return `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: rgba(0,0,0,0.2);">
-                    <button onclick="prevSlide()" ${currentSlide === 0 ? 'disabled' : ''} 
-                        style="background: white; border-radius: 9999px; padding: 0.75rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: none; cursor: pointer; ${currentSlide === 0 ? 'opacity: 0.5; cursor: not-allowed;' : ''}">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#581c87" stroke-width="2">
-                            <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                    </button>
-
-                    <div style="color: white; font-size: clamp(0.875rem, 2vw, 1.25rem); font-weight: bold;">
-                        ${currentSlide + 1} / ${slides.length}
-                    </div>
-
-                    <button onclick="nextSlide()" ${currentSlide === slides.length - 1 ? 'disabled' : ''} 
-                        style="background: white; border-radius: 9999px; padding: 0.75rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: none; cursor: pointer; ${currentSlide === slides.length - 1 ? 'opacity: 0.5; cursor: not-allowed;' : ''}">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#581c87" stroke-width="2">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
-                </div>
-            `;
-        }
-
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                showAnswer = false;
-                render();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                showAnswer = false;
-                render();
-            }
-        }
-
-        function toggleAnswer() {
-            if (slides[currentSlide].type === 'question') {
-                showAnswer = !showAnswer;
-                render();
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-            if (e.key === ' ' || e.key === 'Enter') toggleAnswer();
-        });
-
-        // Initial render
-        render();
+        loadData();
     </script>
 </body>
 </html>
