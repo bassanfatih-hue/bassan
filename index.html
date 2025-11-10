@@ -16,116 +16,162 @@
             background: #0a0a0a;
             color: #ffffff;
             min-height: 100vh;
-            padding: 20px;
+        }
+
+        nav {
+            background: #141414;
+            border-bottom: 2px solid #ffffff;
+            padding: 30px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            border-bottom-color: #ffffff;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
+            padding: 40px 20px;
         }
 
         header {
             text-align: center;
             padding: 60px 20px 40px;
             margin-bottom: 50px;
-            border-bottom: 1px solid #2a2a2a;
         }
 
         header h1 {
-            font-size: 2.8em;
+            font-size: 3.5em;
             font-weight: 700;
             letter-spacing: -1px;
             margin-bottom: 12px;
         }
 
-        header p {
-            font-size: 1.1em;
-            color: #888;
-            font-weight: 300;
-        }
-
         .section {
-            background: #141414;
-            border: 1px solid #2a2a2a;
-            padding: 35px;
-            margin-bottom: 30px;
-            transition: border-color 0.3s;
-        }
-
-        .section:hover {
-            border-color: #444;
+            margin-bottom: 60px;
         }
 
         .section h2 {
             color: #ffffff;
-            margin-bottom: 25px;
-            font-size: 1.8em;
+            margin-bottom: 30px;
+            font-size: 2.2em;
             font-weight: 600;
             letter-spacing: -0.5px;
+            text-align: center;
         }
 
-        .team {
-            background: #0a0a0a;
-            border-left: 2px solid #ffffff;
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .player-card {
+            background: #141414;
+            border: 1px solid #2a2a2a;
             padding: 20px;
-            margin: 20px 0;
+            text-align: center;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .team:hover {
-            border-left-width: 4px;
-            padding-left: 25px;
+        .player-card:hover {
+            border-color: #ffffff;
+            transform: translateY(-2px);
         }
 
-        .team h3 {
+        .player-card h3 {
             color: #ffffff;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: 600;
         }
 
-        .team p {
+        .akte-detail {
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            padding: 30px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .akte-detail.active {
+            display: block;
+        }
+
+        .akte-detail h3 {
+            color: #ffffff;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .akte-empty {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .akte-entry {
+            background: #0a0a0a;
+            border-left: 2px solid #ffffff;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .akte-entry p {
             color: #aaa;
             line-height: 1.6;
-            margin-bottom: 8px;
         }
 
-        .team-members {
+        .akte-entry small {
             color: #666;
-            font-size: 0.95em;
-            margin-top: 10px;
+            font-size: 0.9em;
         }
 
-        .akte-item, .gesetz-item {
-            background: #0a0a0a;
+        .gesetz-item {
+            background: #141414;
             border-left: 2px solid #ffffff;
-            padding: 20px;
+            padding: 25px;
             margin: 20px 0;
             transition: all 0.3s;
         }
 
-        .akte-item:hover, .gesetz-item:hover {
+        .gesetz-item:hover {
             border-left-width: 4px;
-            padding-left: 25px;
+            padding-left: 30px;
         }
 
-        .akte-item h3, .gesetz-item h3 {
+        .gesetz-item h3 {
             color: #ffffff;
             margin-bottom: 12px;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 600;
         }
 
-        .akte-item p, .gesetz-item p {
+        .gesetz-item p {
             color: #aaa;
             line-height: 1.7;
-        }
-
-        .akte-item small {
-            color: #666;
-            font-size: 0.9em;
-            display: block;
-            margin-top: 10px;
         }
 
         .loading {
@@ -135,45 +181,54 @@
             font-size: 1.1em;
         }
 
-        footer {
-            text-align: center;
-            color: #666;
-            padding: 40px 20px;
-            margin-top: 60px;
-            border-top: 1px solid #2a2a2a;
-            font-size: 0.9em;
+        .back-button {
+            background: #ffffff;
+            color: #0a0a0a;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
         }
 
-        footer #lastUpdate {
-            color: #888;
+        .back-button:hover {
+            background: #ddd;
         }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="container">
+            <a href="#teams">TEAMS</a>
+            <a href="#akten">AKTEN</a>
+            <a href="#gesetze">GESETZE</a>
+        </div>
+    </nav>
+
     <div class="container">
         <header>
             <h1>MC Server</h1>
-            <p>Teams · Akten · Gesetze</p>
         </header>
 
         <div id="content">
             <div class="loading">Lade Daten...</div>
         </div>
-
-        <footer>
-            <p>Minecraft Server / Letztes Update: <span id="lastUpdate"></span></p>
-        </footer>
     </div>
 
     <script>
+        let currentData = null;
+
         async function loadData() {
             try {
                 const response = await fetch('data.json');
                 const data = await response.json();
+                currentData = data;
                 displayData(data);
             } catch (error) {
                 document.getElementById('content').innerHTML = 
-                    '<div class="section"><p style="color: red;">Fehler beim Laden der Daten. Bitte data.json Datei überprüfen.</p></div>';
+                    '<div class="section"><p style="color: red;">Fehler beim Laden der Daten.</p></div>';
             }
         }
 
@@ -181,37 +236,37 @@
             let html = '';
 
             // Teams Section
-            html += '<div class="section"><h2>TEAMS</h2>';
+            html += '<div class="section" id="teams"><h2>VERFÜGBARE SPIELER</h2>';
+            html += '<div class="players-grid">';
             data.teams.forEach(team => {
                 html += `
-                    <div class="team">
+                    <div class="player-card">
                         <h3>${team.name}</h3>
-                        <p>${team.beschreibung}</p>
-                        <p class="team-members">Mitglieder: ${team.mitglieder.join(', ')}</p>
+                    </div>
+                `;
+            });
+            html += '</div></div>';
+
+            // Akten Section
+            html += '<div class="section" id="akten"><h2>AKTEN</h2>';
+            html += '<div class="players-grid">';
+            data.teams.forEach(team => {
+                html += `
+                    <div class="player-card" onclick="showAkte('${team.name}')">
+                        <h3>${team.name}</h3>
                     </div>
                 `;
             });
             html += '</div>';
-
-            // Akten Section
-            html += '<div class="section"><h2>AKTEN</h2>';
-            data.akten.forEach(akte => {
-                html += `
-                    <div class="akte-item">
-                        <h3>${akte.titel}</h3>
-                        <p>${akte.inhalt}</p>
-                        <small>${akte.datum}</small>
-                    </div>
-                `;
-            });
+            html += '<div id="akte-detail" class="akte-detail"></div>';
             html += '</div>';
 
             // Gesetze Section
-            html += '<div class="section"><h2>GESETZE</h2>';
-            data.gesetze.forEach((gesetz, index) => {
+            html += '<div class="section" id="gesetze"><h2>SERVERGESETZBUCH</h2>';
+            data.gesetze.forEach(gesetz => {
                 html += `
                     <div class="gesetz-item">
-                        <h3>§${index + 1} ${gesetz.titel}</h3>
+                        <h3>${gesetz.titel}</h3>
                         <p>${gesetz.text}</p>
                     </div>
                 `;
@@ -219,7 +274,41 @@
             html += '</div>';
 
             document.getElementById('content').innerHTML = html;
-            document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('de-DE');
+        }
+
+        function showAkte(playerName) {
+            const akteDetail = document.getElementById('akte-detail');
+            
+            // Finde Einträge für diesen Spieler
+            const playerAkten = currentData.akten.filter(akte => 
+                akte.spieler === playerName
+            );
+
+            let html = `<button class="back-button" onclick="hideAkte()">Zurück</button>`;
+            html += `<h3>Akte: ${playerName}</h3>`;
+
+            if (playerAkten.length === 0) {
+                html += '<p class="akte-empty">Diese Akte ist leer</p>';
+            } else {
+                playerAkten.forEach(akte => {
+                    html += `
+                        <div class="akte-entry">
+                            <p><strong>${akte.titel}</strong></p>
+                            <p>${akte.inhalt}</p>
+                            <small>${akte.datum}</small>
+                        </div>
+                    `;
+                });
+            }
+
+            akteDetail.innerHTML = html;
+            akteDetail.classList.add('active');
+            akteDetail.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideAkte() {
+            const akteDetail = document.getElementById('akte-detail');
+            akteDetail.classList.remove('active');
         }
 
         loadData();
