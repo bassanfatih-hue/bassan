@@ -1,0 +1,40 @@
+{
+  "teams": [
+    {
+      "name": "Admin Team",
+      "beschreibung": "Das Admin-Team kümmert sich um die Verwaltung des Servers",
+      "mitglieder": ["Steve", "Alex"]
+    },
+    {
+      "name": "Builder Team",
+      "beschreibung": "Baut coole Projekte und kümmert sich um die Spawn-Area",
+      "mitglieder": ["Notch", "Herobrine", "Jeb"]
+    }
+  ],
+  "akten": [
+    {
+      "titel": "Server Start",
+      "inhalt": "Der Server wurde heute offiziell gestartet! Viel Spaß beim Bauen!",
+      "datum": "10.11.2025"
+    },
+    {
+      "titel": "Spawn fertiggestellt",
+      "inhalt": "Die Spawn-Area ist jetzt komplett fertig gebaut.",
+      "datum": "09.11.2025"
+    }
+  ],
+  "gesetze": [
+    {
+      "titel": "Kein Griefing",
+      "text": "Das Zerstören von Bauwerken anderer Spieler ist strengstens verboten."
+    },
+    {
+      "titel": "Respektvoller Umgang",
+      "text": "Alle Spieler müssen respektvoll miteinander umgehen. Beleidigungen führen zu einem Ban."
+    },
+    {
+      "titel": "Keine Cheats",
+      "text": "Die Nutzung von Hacks oder unfairen Mods ist nicht erlaubt."
+    }
+  ]
+}
