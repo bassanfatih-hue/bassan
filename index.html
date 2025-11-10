@@ -1,4 +1,10 @@
-<style>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC Server</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -111,7 +117,6 @@
             font-weight: 600;
         }
 
-        /* Mobile-optimierte Tabelle */
         .table-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -239,7 +244,6 @@
             background: #ddd;
         }
 
-        /* Handy-optimierungen */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2em;
@@ -315,3 +319,136 @@
             }
         }
     </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#teams">TEAMS</a>
+            <a href="#akten">AKTEN</a>
+            <a href="#gesetze">GESETZE</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>MC Server</h1>
+        </header>
+
+        <div id="content">
+            <div class="loading">Lade Daten...</div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                currentData = data;
+                displayData(data);
+            } catch (error) {
+                document.getElementById('content').innerHTML = 
+                    '<div class="section"><p style="color: red;">Fehler beim Laden der Daten.</p></div>';
+            }
+        }
+
+        function displayData(data) {
+            let html = '';
+
+            html += '<div class="section" id="teams"><h2>TEAMS</h2>';
+            
+            html += '<h3>Verfügbare Spieler</h3>';
+            html += '<div class="players-grid">';
+            data.verfuegbareSpieler.forEach(spieler => {
+                html += `
+                    <div class="player-card">
+                        <h4>${spieler}</h4>
+                    </div>
+                `;
+            });
+            html += '</div>';
+
+            html += '<h3>Teams</h3>';
+            html += '<div class="table-container"><table><thead><tr><th>Team Name</th><th>Anführer</th><th>Mitglieder</th><th>Erstellt am</th></tr></thead><tbody>';
+            
+            data.teams.forEach(team => {
+                const mitglieder = team.mitglieder.join(', ') || '-';
+                html += `
+                    <tr>
+                        <td><strong>${team.name}</strong></td>
+                        <td>${team.anfuehrer}</td>
+                        <td>${mitglieder}</td>
+                        <td>${team.erstelltAm}</td>
+                    </tr>
+                `;
+            });
+            
+            html += '</tbody></table></div></div>';
+
+            html += '<div class="section" id="akten"><h2>AKTEN</h2>';
+            html += '<div class="players-grid">';
+            data.verfuegbareSpieler.forEach(spieler => {
+                html += `
+                    <div class="player-card" onclick="showAkte('${spieler}')">
+                        <h4>${spieler}</h4>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            html += '<div id="akte-detail" class="akte-detail"></div>';
+            html += '</div>';
+
+            html += '<div class="section" id="gesetze"><h2>SERVERGESETZBUCH</h2>';
+            data.gesetze.forEach(gesetz => {
+                html += `
+                    <div class="gesetz-item">
+                        <h4>${gesetz.titel}</h4>
+                        <p>${gesetz.text}</p>
+                    </div>
+                `;
+            });
+            html += '</div>';
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function showAkte(playerName) {
+            const akteDetail = document.getElementById('akte-detail');
+            
+            const playerAkten = currentData.akten.filter(akte => 
+                akte.spieler === playerName
+            );
+
+            let html = `<button class="back-button" onclick="hideAkte()">Zurück</button>`;
+            html += `<h4>Akte: ${playerName}</h4>`;
+
+            if (playerAkten.length === 0) {
+                html += '<p class="akte-empty">Diese Akte ist leer</p>';
+            } else {
+                playerAkten.forEach(akte => {
+                    html += `
+                        <div class="akte-entry">
+                            <p><strong>${akte.titel}</strong></p>
+                            <p>${akte.inhalt}</p>
+                            <small>${akte.datum}</small>
+                        </div>
+                    `;
+                });
+            }
+
+            akteDetail.innerHTML = html;
+            akteDetail.classList.add('active');
+            akteDetail.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideAkte() {
+            const akteDetail = document.getElementById('akte-detail');
+            akteDetail.classList.remove('active');
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
