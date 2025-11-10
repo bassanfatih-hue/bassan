@@ -1,40 +1,151 @@
 {
   "teams": [
     {
-      "name": "Admin Team",
-      "beschreibung": "Das Admin-Team kümmert sich um die Verwaltung des Servers",
-      "mitglieder": ["Steve", "Alex"]
+      "name": "Fatih",
+      "beschreibung": "",
+      "mitglieder": []
     },
     {
-      "name": "Builder Team",
-      "beschreibung": "Baut coole Projekte und kümmert sich um die Spawn-Area",
-      "mitglieder": ["Notch", "Herobrine", "Jeb"]
-    }
-  ],
-  "akten": [
-    {
-      "titel": "Server Start",
-      "inhalt": "Der Server wurde heute offiziell gestartet! Viel Spaß beim Bauen!",
-      "datum": "10.11.2025"
+      "name": "Anis",
+      "beschreibung": "",
+      "mitglieder": []
     },
     {
-      "titel": "Spawn fertiggestellt",
-      "inhalt": "Die Spawn-Area ist jetzt komplett fertig gebaut.",
-      "datum": "09.11.2025"
+      "name": "Antoine",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Arnav",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Delvan",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Diyen",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Efe",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Josef",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Julian",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Karl",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Kian",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Said",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Silas",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Tawfiq",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Danilo",
+      "beschreibung": "",
+      "mitglieder": []
+    },
+    {
+      "name": "Tom",
+      "beschreibung": "",
+      "mitglieder": []
     }
   ],
+  "akten": [],
   "gesetze": [
     {
-      "titel": "Kein Griefing",
-      "text": "Das Zerstören von Bauwerken anderer Spieler ist strengstens verboten."
+      "titel": "I. KAMPF & AKTIVITÄT",
+      "text": ""
     },
     {
-      "titel": "Respektvoller Umgang",
-      "text": "Alle Spieler müssen respektvoll miteinander umgehen. Beleidigungen führen zu einem Ban."
+      "titel": "Artikel 1 - PvP & Diebstahl",
+      "text": "Jeder darf Spieler töten und bestehlen mit denen er nichts zu tun hat (also kein Pakt, kein Team)"
     },
     {
-      "titel": "Keine Cheats",
-      "text": "Die Nutzung von Hacks oder unfairen Mods ist nicht erlaubt."
+      "titel": "Artikel 2 - Inaktivität",
+      "text": "Wer 5 Tage inaktiv ist (ohne Ausrede) wird gekickt"
+    },
+    {
+      "titel": "II. TEAMS, GRUPPIERUNGEN & PAKTE",
+      "text": ""
+    },
+    {
+      "titel": "Artikel 1 - Gruppierung",
+      "text": "A) Wenn man Teams erstellt, muss man mir privat oder in der Gruppe eine Nachricht schreiben mit den Personen und wer der Anführer ist. B) Wenn man ein Team verlassen möchte, muss jeder im Team damit einverstanden sein."
+    },
+    {
+      "titel": "Artikel 2 - Teams & Pakte",
+      "text": "A) Jedes Team braucht 1 Anführer. Nur Anführer dürfen Friedensverträge schließen. B) Ein Pakt zählt erst, wenn beide Anführer beider Seiten auf WhatsApp privat schreiben, z.B. 'Wir machen einen Pakt' als Beweis falls jemand eine Straftat begeht. Wenn das nicht gemacht wurde und jemand diesen Pakt verrät wird die Person nicht bestraft weil es keine Beweise gibt."
+    },
+    {
+      "titel": "Artikel 3 - Paktbruch",
+      "text": "Wer einen Pakt bricht und gemeldet wird (mit WhatsApp-Beweis): 1. Mal = 2 Tag Bann, 2. Mal = 4 Tage Bann, 3. Mal = Perma Bann. Also lieber Pakt wieder abbrechen bevor ihr kämpfen wollt (indem beide Seiten kein Pakt mehr möchten)."
+    },
+    {
+      "titel": "Artikel 4 - Verrat",
+      "text": "Wer sein Team verrät (mit Beweis): 1. Mal = 5 Tage Bann, 2. Mal = Permanent Bann"
+    },
+    {
+      "titel": "III. AKTE & VERWALTUNG",
+      "text": ""
+    },
+    {
+      "titel": "Artikel 1 - Öffentliche Akte",
+      "text": "Alle bewiesenen Straftaten werden notiert und kommen in die öffentliche Akte"
+    },
+    {
+      "titel": "Artikel 2 - Gleichberechtigung",
+      "text": "Admins und Mitglieder sind gleichberechtigt."
+    },
+    {
+      "titel": "Artikel 3 - Akte-Strafen",
+      "text": "Bei 3 Straftaten wird eine Strafe festgelegt"
+    },
+    {
+      "titel": "Artikel 4 - Dokumentation",
+      "text": "Der Seitenführer (Verantwortliche für die Akte und alles) muss alle wichtigen Infos eintragen"
+    },
+    {
+      "titel": "IV. GERICHT & STREITLÖSUNG",
+      "text": ""
+    },
+    {
+      "titel": "Artikel 1 - Streit",
+      "text": "Bei richtigen Streitereien gibt es ein Gerichtsverfahren mit Richter wenn die Beteiligten das wollen um es zu klären"
+    },
+    {
+      "titel": "Artikel 2 - Gericht",
+      "text": "Beide Seiten dürfen 2 Minuten reden und am Ende sagen, was sie als Schlusspunkt wollen: 1. Strafe (Bann bei gerechtfertigten Fällen), 2. Friedenspakt zwischen den streitenden, 3. Anderes"
     }
   ]
 }
